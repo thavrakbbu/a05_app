@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Method Test</title>
+    <style>
+    .payment-methods-container > div {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .payment-methods-container > div:hover {
+        border-color: #007bff;
+        background-color: #f8f9fa;
+    }
+
+    .payment-methods-container > div.selected {
+        border-color: #007bff;
+        background-color: #e3f2fd;
+    }
+
+    .payment-methods-container input[type="radio"] {
+        margin-right: 10px;
+    }
+    </style>
+</head>
+<body>
+    <h3>Payment Method</h3>
+    <div class="payment-methods-container">
+        <div>
+            <label for="payment_method_1">
+                <input type="radio" name="payment_method" value="bank_transfer" id="payment_method_1" checked>
+                Bank Transfer
+            </label>
+        </div>
+        <div>
+            <label for="payment_method_2">
+                <input type="radio" name="payment_method" value="cash_on_delivery" id="payment_method_2">
+                Cash on Delivery
+            </label>
+        </div>
+        <div>
+            <label for="payment_method_3">
+                <input type="radio" name="payment_method" value="aba_pay" id="payment_method_3">
+                ABA Pay
+            </label>
+        </div>
+        <div>
+            <label for="payment_method_4">
+                <input type="radio" name="payment_method" value="wing" id="payment_method_4">
+                Wing
+            </label>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const paymentMethods = document.querySelectorAll('.payment-methods-container > div');
+        
+        // Payment method selection
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    
+                    // Remove selected class from all methods
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    // Add selected class to clicked method
+                    this.classList.add('selected');
+                }
+            });
+        });
+        
+        // Initialize selected payment method
+        const checkedPaymentMethod = document.querySelector('.payment-methods-container input[type="radio"]:checked');
+        if (checkedPaymentMethod) {
+            checkedPaymentMethod.closest('div').classList.add('selected');
+        }
+    });
+    </script>
+</body>
+</html>
